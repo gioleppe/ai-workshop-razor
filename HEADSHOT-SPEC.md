@@ -253,8 +253,8 @@ Add `HeadshotUrl` to each seeded person using colour-coded `ui-avatars.com` URLs
 
 ```html
 <div class="d-flex align-items-center gap-3">
-    <img src="@(person.HeadshotUrl ?? "https://via.placeholder.com/64")"
-         onerror="this.onerror=null;this.src='https://via.placeholder.com/64?text=No+Image';"
+    <img src="@(person.HeadshotUrl ?? "https://ui-avatars.com/api/?name=NA&size=256")"
+         onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=NA&size=256';"
          alt="@person.FullName headshot"
          class="headshot" />
     <h2 class="h4 mb-0">@person.FullName</h2>
