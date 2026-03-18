@@ -10,7 +10,10 @@ Prerequisites:
 ---
 
 1. Slides about agents / agentic AI
-2. Create n8n agent
+2. Show .NET app
+    a. show everything
+    b. extend it to add headshot images via cloud agent
+3. Create n8n agent
     a. from scratch, add connectors, add model
     b. test chat with simple "how are you?" prompt
     c. show monitor in foundry
@@ -20,7 +23,10 @@ Prerequisites:
         {{ $fromAI("fullName", "the name of the famous person", "string") }}
         {{ $fromAI("fullName", "the background of the famous person", "string") }}
         {{ $fromAI("competenceField", "the competence field of the famous person", "string")}}
-
+4. Back to the .NET app
+    a. show images with placeholder
+    b. open step 2 workflow in n8n
+    c. add headshot images by using n8n
 
 Post-mortem:
 - Close network for SearXNG
