@@ -24,4 +24,9 @@ public sealed class FamousPerson
     /// Field in which the person is especially known.
     /// </summary>
     public required string CompetenceField { get; set; }
+
+    /// <summary>
+    /// Optional URL to a headshot image for the person.
+    /// </summary>
+    public string? HeadshotUrl { get; set; }
 }

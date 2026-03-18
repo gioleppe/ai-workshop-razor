@@ -23,6 +23,7 @@ public sealed class FamousPersonService(AppDbContext dbContext) : IFamousPersonS
         string fullName,
         string background,
         string competenceField,
+        string? headshotUrl = null,
         CancellationToken cancellationToken = default)
     {
         var person = new FamousPerson
@@ -32,6 +33,11 @@ public sealed class FamousPersonService(AppDbContext dbContext) : IFamousPersonS
             Background = background.Trim(),
             CompetenceField = competenceField.Trim()
         };
+
+        // Assign a sensible default headshot URL when none provided.
+        person.HeadshotUrl = string.IsNullOrWhiteSpace(headshotUrl)
+            ? $"https://ui-avatars.com/api/?name={Uri.EscapeDataString(person.FullName)}&size=256"
+            : headshotUrl.Trim();
 
         dbContext.FamousPeople.Add(person);
         await dbContext.SaveChangesAsync(cancellationToken);
@@ -45,6 +51,7 @@ public sealed class FamousPersonService(AppDbContext dbContext) : IFamousPersonS
         string fullName,
         string background,
         string competenceField,
+        string? headshotUrl = null,
         CancellationToken cancellationToken = default)
     {
         var person = await dbContext.FamousPeople.FirstOrDefaultAsync(
@@ -60,6 +67,31 @@ public sealed class FamousPersonService(AppDbContext dbContext) : IFamousPersonS
         person.Background = background.Trim();
         person.CompetenceField = competenceField.Trim();
 
+        if (headshotUrl is not null)
+        {
+            person.HeadshotUrl = string.IsNullOrWhiteSpace(headshotUrl) ? null : headshotUrl.Trim();
+        }
+
+        await dbContext.SaveChangesAsync(cancellationToken);
+        return true;
+    }
+
+    /// <inheritdoc />
+    public async Task<bool> UpdateHeadshotAsync(
+        Guid id,
+        string? headshotUrl,
+        CancellationToken cancellationToken = default)
+    {
+        var person = await dbContext.FamousPeople.FirstOrDefaultAsync(
+            existingPerson => existingPerson.Id == id,
+            cancellationToken);
+
+        if (person is null)
+        {
+            return false;
+        }
+
+        person.HeadshotUrl = string.IsNullOrWhiteSpace(headshotUrl) ? null : headshotUrl.Trim();
         await dbContext.SaveChangesAsync(cancellationToken);
         return true;
     }

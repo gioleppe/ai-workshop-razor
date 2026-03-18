@@ -32,6 +32,15 @@
             border-radius: 999px;
             font-weight: 600;
         }
+
+        .headshot {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background-color: #f3f4f6;
+        }
     </style>
 </head>
 <body>
@@ -67,7 +76,13 @@
                         <article class="card person-card h-100">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
-                                    <h2 class="h4 mb-0">@person.FullName</h2>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="@(person.HeadshotUrl ?? "https://ui-avatars.com/api/?name=NA&size=256")"
+                                             onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=NA&size=256';"
+                                             alt="@person.FullName headshot"
+                                             class="headshot" />
+                                        <h2 class="h4 mb-0">@person.FullName</h2>
+                                    </div>
                                     <span class="field-badge px-3 py-2 small">@person.CompetenceField</span>
                                 </div>
                                 <p class="text-secondary mb-0">@person.Background</p>

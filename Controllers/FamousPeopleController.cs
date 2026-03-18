@@ -46,6 +46,7 @@ public sealed class FamousPeopleController(IFamousPersonService famousPersonServ
             request.FullName,
             request.Background,
             request.CompetenceField,
+            request.HeadshotUrl,
             cancellationToken);
 
         var response = MapResponse(person);
@@ -84,8 +85,30 @@ public sealed class FamousPeopleController(IFamousPersonService famousPersonServ
             request.FullName,
             request.Background,
             request.CompetenceField,
+            request.HeadshotUrl,
             cancellationToken);
 
+        return updated ? NoContent() : NotFound();
+    }
+
+    /// <summary>
+    /// Updates only the headshot URL for a famous person.
+    /// </summary>
+    [HttpPut("{id:guid}/headshot")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> UpdateHeadshotAsync(
+        Guid id,
+        [FromBody] HeadshotRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (request is null)
+        {
+            return BadRequest();
+        }
+
+        var updated = await famousPersonService.UpdateHeadshotAsync(id, request.HeadshotUrl, cancellationToken);
         return updated ? NoContent() : NotFound();
     }
 
@@ -95,6 +118,7 @@ public sealed class FamousPeopleController(IFamousPersonService famousPersonServ
             Id = person.Id,
             FullName = person.FullName,
             Background = person.Background,
-            CompetenceField = person.CompetenceField
+            CompetenceField = person.CompetenceField,
+            HeadshotUrl = person.HeadshotUrl
         };
 }
