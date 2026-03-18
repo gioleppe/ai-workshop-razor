@@ -1,0 +1,70 @@
+### Workshop quick-start
+# Use the VS Code "REST Client" extension (or compatible .http support).
+# Start the app first:
+# dotnet run --launch-profile http
+
+@host = http://localhost:5000
+@contentType = application/json
+
+### Root UI
+GET {{host}}/
+
+### OpenAPI document
+GET {{host}}/openapi/v1.json
+
+### List current famous people
+GET {{host}}/api/famouspeople
+Accept: {{contentType}}
+
+### Create a new famous person
+# @name createPerson
+POST {{host}}/api/famouspeople
+Content-Type: {{contentType}}
+Accept: {{contentType}}
+
+{
+  "fullName": "Grace Hopper",
+  "background": "American computer scientist and U.S. Navy rear admiral who helped pioneer compilers and popularized machine-independent programming languages.",
+  "competenceField": "Computer Science"
+}
+
+### Capture created id for follow-up requests
+@createdPersonId = {{createPerson.response.body.$.id}}
+
+### Update the person created above
+PUT {{host}}/api/famouspeople/{{createdPersonId}}
+Content-Type: {{contentType}}
+
+{
+  "id": "{{createdPersonId}}",
+  "fullName": "Grace Hopper",
+  "background": "American computer scientist and U.S. Navy rear admiral whose work on compilers and COBOL helped shape modern software development.",
+  "competenceField": "Computer Science"
+}
+
+### Confirm the updated list
+GET {{host}}/api/famouspeople
+Accept: {{contentType}}
+
+### Example validation failure
+POST {{host}}/api/famouspeople
+Content-Type: {{contentType}}
+Accept: {{contentType}}
+
+{
+  "fullName": "",
+  "background": "This should fail because fullName is required.",
+  "competenceField": "Workshop Demo"
+}
+
+### Example not-found update
+PUT {{host}}/api/famouspeople/00000000-0000-0000-0000-000000000000
+Content-Type: {{contentType}}
+Accept: {{contentType}}
+
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "fullName": "Missing Person",
+  "background": "This demonstrates the 404 response for an unknown identifier.",
+  "competenceField": "Workshop Demo"
+}

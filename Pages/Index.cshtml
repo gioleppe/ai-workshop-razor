@@ -1,0 +1,86 @@
+@page
+@model AI_Workshop_App.Pages.IndexModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Famous People Dashboard</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous" />
+    <style>
+        body {
+            background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+            min-height: 100vh;
+        }
+
+        .person-card {
+            border: 0;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        .field-badge {
+            background-color: #dbeafe;
+            color: #1d4ed8;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <main class="container py-5">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 text-center">
+                <span class="badge rounded-pill text-bg-dark mb-3">AI Workshop Demo</span>
+                <h1 class="display-5 fw-bold">Famous People Dashboard</h1>
+                <p class="lead text-secondary mb-0">
+                    This page reads directly from the shared <code>IFamousPersonService</code>, so any agent API changes show up here automatically.
+                </p>
+                <p class="small text-secondary mt-3 mb-0">Auto-refreshing every 3 seconds.</p>
+            </div>
+        </div>
+
+        @if (Model.People.Count == 0)
+        {
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="alert alert-light border shadow-sm text-center py-4">
+                        <h2 class="h4">No people yet</h2>
+                        <p class="mb-0 text-secondary">Use the <code>/api/famouspeople</code> endpoints to populate the demo.</p>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var person in Model.People)
+                {
+                    <div class="col-md-6 col-xl-4">
+                        <article class="card person-card h-100">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
+                                    <h2 class="h4 mb-0">@person.FullName</h2>
+                                    <span class="field-badge px-3 py-2 small">@person.CompetenceField</span>
+                                </div>
+                                <p class="text-secondary mb-0">@person.Background</p>
+                            </div>
+                        </article>
+                    </div>
+                }
+            </div>
+        }
+    </main>
+
+    <script>
+        window.setInterval(() => window.location.reload(), 3000);
+    </script>
+</body>
+</html>
