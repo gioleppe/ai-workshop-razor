@@ -21,7 +21,7 @@ Prerequisites:
     e. look up for famous italian people online 
     f. add an http tool to create new people on our app
         {{ $fromAI("fullName", "the name of the famous person", "string") }}
-        {{ $fromAI("fullName", "the background of the famous person", "string") }}
+        {{ $fromAI("background", "the background of the famous person", "string") }}
         {{ $fromAI("competenceField", "the competence field of the famous person", "string")}}
 4. Back to the .NET app
     a. show images with placeholder
