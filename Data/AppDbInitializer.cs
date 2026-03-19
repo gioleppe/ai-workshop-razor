@@ -26,21 +26,24 @@ public static class AppDbInitializer
                 Id = Guid.NewGuid(),
                 FullName = "Ada Lovelace",
                 Background = "English mathematician and writer who is widely regarded as the first computer programmer because of her work on Charles Babbage's Analytical Engine.",
-                CompetenceField = "Computer Science"
+                CompetenceField = "Computer Science",
+                HeadshotUrl = "https://ui-avatars.com/api/?name=Ada+Lovelace&background=0D6EFD&color=fff&size=256"
             },
             new FamousPerson
             {
                 Id = Guid.NewGuid(),
                 FullName = "Marie Curie",
                 Background = "Physicist and chemist whose pioneering research on radioactivity made her the first woman to win a Nobel Prize and the first person to win it twice.",
-                CompetenceField = "Physics"
+                CompetenceField = "Physics",
+                HeadshotUrl = "https://ui-avatars.com/api/?name=Marie+Curie&background=7C3AED&color=fff&size=256"
             },
             new FamousPerson
             {
                 Id = Guid.NewGuid(),
                 FullName = "Nelson Mandela",
                 Background = "South African anti-apartheid leader and president celebrated for his lifelong work advancing reconciliation, justice, and democracy.",
-                CompetenceField = "Politics"
+                CompetenceField = "Politics",
+                HeadshotUrl = "https://ui-avatars.com/api/?name=Nelson+Mandela&background=059669&color=fff&size=256"
             });
 
         await dbContext.SaveChangesAsync();

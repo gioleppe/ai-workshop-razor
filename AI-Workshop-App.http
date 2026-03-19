@@ -25,7 +25,8 @@ Accept: {{contentType}}
 {
   "fullName": "Grace Hopper",
   "background": "American computer scientist and U.S. Navy rear admiral who helped pioneer compilers and popularized machine-independent programming languages.",
-  "competenceField": "Computer Science"
+  "competenceField": "Computer Science",
+  "headshotUrl": "https://ui-avatars.com/api/?name=Grace+Hopper&size=256"
 }
 
 ### Capture created id for follow-up requests
@@ -39,7 +40,17 @@ Content-Type: {{contentType}}
   "id": "{{createdPersonId}}",
   "fullName": "Grace Hopper",
   "background": "American computer scientist and U.S. Navy rear admiral whose work on compilers and COBOL helped shape modern software development.",
-  "competenceField": "Computer Science"
+  "competenceField": "Computer Science",
+  "headshotUrl": "https://ui-avatars.com/api/?name=Grace+Hopper&size=256"
+}
+
+### Update only headshot for a person
+PUT {{host}}/api/famouspeople/{{createdPersonId}}/headshot
+Content-Type: {{contentType}}
+Accept: {{contentType}}
+
+{
+  "headshotUrl": "https://example.com/images/grace.jpg"
 }
 
 ### Confirm the updated list
