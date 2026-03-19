@@ -19,6 +19,7 @@ public interface IFamousPersonService
         string fullName,
         string background,
         string competenceField,
+        string? headshotUrl = null,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -29,5 +30,14 @@ public interface IFamousPersonService
         string fullName,
         string background,
         string competenceField,
+        string? headshotUrl = null,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Updates only the headshot URL for the specified famous person.
+    /// </summary>
+    Task<bool> UpdateHeadshotAsync(
+        Guid id,
+        string? headshotUrl,
         CancellationToken cancellationToken = default);
 }

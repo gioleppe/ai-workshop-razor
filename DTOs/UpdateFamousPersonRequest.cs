@@ -33,4 +33,10 @@ public sealed class UpdateFamousPersonRequest
     [Required]
     [StringLength(200)]
     public string CompetenceField { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Optional URL pointing to a headshot image for the person.
+    /// </summary>
+    [StringLength(2000)]
+    public string? HeadshotUrl { get; set; }
 }

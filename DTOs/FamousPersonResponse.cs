@@ -24,4 +24,9 @@ public sealed class FamousPersonResponse
     /// Domain or discipline in which the person is famous.
     /// </summary>
     public string CompetenceField { get; init; } = string.Empty;
+
+    /// <summary>
+    /// Optional URL to a headshot image for the person.
+    /// </summary>
+    public string? HeadshotUrl { get; init; }
 }
